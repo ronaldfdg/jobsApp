@@ -31,10 +31,10 @@ public class User {
 	private String password;
 	
 	@Column(name = "estatus", nullable = false)
-	private boolean status;
+	private boolean status = true;
 	
 	@Column(name = "fechaRegistro")
-	private Date registrationDate;
+	private Date registrationDate = new Date();
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "usuarioperfil",
@@ -101,7 +101,19 @@ public class User {
 	public void setRegistrationDate(Date registrationDate) {
 		this.registrationDate = registrationDate;
 	}
-	
-	
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", username=" + username + ", password="
+				+ password + ", status=" + status + ", registrationDate=" + registrationDate + "]";
+	}
 	
 }

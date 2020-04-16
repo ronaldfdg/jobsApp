@@ -20,6 +20,11 @@
 	</header>
 	
 	<h1>Hola mundo!</h1>
+	<hr>
+	
+	<div th:if="${messageSuccess != null}" class="alert alert-success" role="alert">
+		<strong>[[${messageSuccess}]]</strong>
+	</div>
 	
 	<footer th:insert="fragments/footer.html :: footer">
 	
