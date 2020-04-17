@@ -19,12 +19,45 @@
 	
 	</header>
 	
-	<h1>Hola mundo!</h1>
-	<hr>
-	
-	<div th:if="${messageSuccess != null}" class="alert alert-success" role="alert">
-		<strong>[[${messageSuccess}]]</strong>
-	</div>
+	<main role="main">
+
+      <div class="jumbotron">
+        <div class="container">
+          <h3>Encuentra el trabajo que andas buscando.</h3>
+          <hr>
+          Puedes buscar por descripción y categoría.
+          <hr>
+          <form class="form-inline">
+            <input type="text" class="form-control mb-3" id="exampleFormControlInput1" placeholder="Escriba una búsqueda">&nbsp;
+            <select class="custom-select custom-select mb-3">
+              <option th:value="${null}" selected>Seleccione una categoría</option>
+              <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+            </select>&nbsp;
+            <button type="submit" class="btn btn-primary mb-3">Buscar</button>
+          </form>
+        </div>
+      </div>
+      <hr>
+
+      <div class="container"> 
+        <h2 class="font-weight-bold text-center text-capitalize">DESTACADOS</h2>
+        <hr>
+        <div class="row" th:each="vacant : ${vacants}">
+          <div class="col-md-3">            
+            <img class="rounded mx-auto d-block" th:src="@{/logos/{img} (img=${vacant.image}) }" alt="Generic placeholder image" width="220" height="220">            
+          </div>
+          <div class="col-md-9">
+            <h2>[[${vacant.name}]]</h2>
+            <h6 class="card-title"><strong>Categoría: </strong> <span>[[${vacant.category.name}]]</span></h6>
+            <h6 class="card-title"><strong>Publicado: </strong> <span th:text="${#dates.format(vacant.publishDate, 'dd-MM-yyyy')}"></span></h6>                
+            <p>[[${vacant.description}]]</p>
+            <p><a class="btn btn-secondary" th:href="@{/vacants/view/{id} (id=${vacant.id}) }" role="button">Ver detalles &raquo;</a></p>            
+          </div>
+        </div>         
+	  	<hr>	
+      </div> <!-- /container -->
+
+    </main>
 	
 	<footer th:insert="fragments/footer.html :: footer">
 	

@@ -49,7 +49,7 @@
                     <!-- <a href="#" class="btn btn-success btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>  -->
                     <a href="#" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
                     <!-- <a href="#" class="btn btn-success btn-sm" role="button" title="Enviar correo electrónico al usuario."><i class="fas fa-envelope" aria-hidden="true"></i></a>  -->
-                    <a th:href="@{/curriculumns/{cv} ( cv = ${request.file} )}" class="btn btn-success btn-sm" role="button" title="Descargar Curriculm Vitae."><i class="fas fa-download" aria-hidden="true"></i></a>
+                    <a th:href="@{/curriculumns/{cv} ( cv = ${request.file} )}" target="_blank" class="btn btn-success btn-sm" role="button" title="Descargar Curriculm Vitae."><i class="fas fa-download" aria-hidden="true"></i></a>
                   </td>
                 </tr>      
               </tbody>

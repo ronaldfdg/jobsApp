@@ -1,9 +1,11 @@
 package com.ronaldfdg.jobsApp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,18 +15,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ronaldfdg.jobsApp.model.Request;
-import com.ronaldfdg.jobsApp.model.User;
 import com.ronaldfdg.jobsApp.service.RequestService;
 import com.ronaldfdg.jobsApp.service.UserService;
 import com.ronaldfdg.jobsApp.service.VacantService;
+import com.ronaldfdg.jobsApp.util.Utileria;
 
 @Controller
 @RequestMapping("/requests")
 public class RequestController {
 
+	@Value("${jobsApp.route.cvs}")
+	private String route;
+	
 	@Autowired
 	private RequestService serviceRequest;
 	
@@ -51,15 +57,24 @@ public class RequestController {
 	}
 	
 	@PostMapping("/send")
-	public String apply(@ModelAttribute Request request, BindingResult result,
-							RedirectAttributes attribute) {
+	public String apply(@ModelAttribute Request request, BindingResult result, @RequestParam("cvFile") MultipartFile multipart,
+							RedirectAttributes attribute, Authentication authentication) {
 		
 		if(result.hasErrors())
 			return "requests/formRequest";
 		
-		User user = serviceUser.findByUsername("");
+		if(!multipart.isEmpty()) {
+			
+			String nameFile = Utileria.saveImage(multipart, route);
+			
+			if(!nameFile.isEmpty() || nameFile != null)
+				request.setFile(nameFile);
+		}
 		
-		return "";
+		request.setUser(serviceUser.findByUsername(authentication.getName()));
+		serviceRequest.save(request);
+		attribute.addFlashAttribute("messageSuccess", "Gracias por enviar tu cv, esperamos que puedas conseguir el empleo");
+		return "redirect:/";
 	}
 	
 }
