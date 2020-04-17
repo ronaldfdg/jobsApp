@@ -10,7 +10,7 @@
     <title>EmpleosApp | Aplicación para publicar Ofertas de Trabajo.</title>
     
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-    <!-- Custom styles for this template -->
+    
     <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
     <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
 </head>
@@ -27,19 +27,34 @@
           <hr>
           Puedes buscar por descripción y categoría.
           <hr>
-          <form class="form-inline">
-            <input type="text" class="form-control mb-3" id="exampleFormControlInput1" placeholder="Escriba una búsqueda">&nbsp;
-            <select class="custom-select custom-select mb-3">
+          
+          <form th:action="@{/search}" class="form-inline">
+          
+            <input type="text" name="description" id="exampleFormControlInput1" class="form-control mb-3" placeholder="Escriba una búsqueda">&nbsp;
+            
+            <select name="categoryId" class="custom-select custom-select mb-3">
               <option th:value="${null}" selected>Seleccione una categoría</option>
-              <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+              <option th:each="category : ${categories}" 
+            		  th:value="${category.id}" 
+            		  th:text="${category.name}"></option>
             </select>&nbsp;
             <button type="submit" class="btn btn-primary mb-3">Buscar</button>
           </form>
+          
         </div>
       </div>
       <hr>
 
       <div class="container"> 
+      	<div class="row">
+      		<div class="col-md-4">
+      		</div>
+      		<div class="col-md-4">
+      			<div th:if="${messageSuccess != null}" style="text-align: center;" class="alert alert-success" role="alert">
+      				<strong>[[${messageSuccess}]]</strong>
+      			</div>
+      		</div>
+      	</div>
         <h2 class="font-weight-bold text-center text-capitalize">DESTACADOS</h2>
         <hr>
         <div class="row" th:each="vacant : ${vacants}">

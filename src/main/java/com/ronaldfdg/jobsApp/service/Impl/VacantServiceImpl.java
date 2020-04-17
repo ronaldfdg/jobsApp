@@ -58,5 +58,22 @@ public class VacantServiceImpl implements VacantService {
 	public Page<Vacant> vacantsPage(Pageable pageable) {
 		return repositoryVacant.findAll(pageable);
 	}
+
+	@Override
+	public List<Vacant> findByDescription(String description) {
+		return repositoryVacant.findByDescriptionContaining(description);
+	}
+
+	@Override
+	public List<Vacant> findByCategoryAndDescription(int categoryId, String description) {
+		return repositoryVacant.findByCategory_IdAndDescriptionContaining(categoryId, description);
+	}
+
+	@Override
+	public List<Vacant> findByCategory(int categoryId) {
+		return repositoryVacant.findByCategory_Id(categoryId);
+	}
+	
+	
 	
 }

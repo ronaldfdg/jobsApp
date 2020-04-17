@@ -10,6 +10,9 @@ import com.ronaldfdg.jobsApp.model.Vacant;
 public interface VacantService {
 
 	List<Vacant> findAll();
+	List<Vacant> findByDescription(String description);
+	List<Vacant> findByCategory(int categoryId);
+	List<Vacant> findByCategoryAndDescription(int categoryId, String description);
 	List<Vacant> findAllApprovedAndSalient();
 	Page<Vacant> vacantsPage(Pageable pageable);
 	Vacant findById(int id);

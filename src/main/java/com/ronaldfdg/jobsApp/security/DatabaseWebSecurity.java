@@ -46,7 +46,8 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 					 "/users/",
 					 "/users/signup",
 					 "/search",
-					 "/vacants/view/**").permitAll()
+					 "/vacants/view/**",
+					 "/about").permitAll()
 		.antMatchers(
 					 "/vacants/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR")
 		.antMatchers(

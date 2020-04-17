@@ -56,6 +56,13 @@ public class RequestController {
 		return "requests/formRequest";
 	}
 	
+	@GetMapping("/delete/{id}")
+	public String delete(@PathVariable("id") int id, RedirectAttributes attribute) {
+		serviceRequest.deleteById(id);
+		attribute.addFlashAttribute("messageSuccess", "Se eliminó la solicitud!");
+		return "redirect:/requests/index?pageNumber=0";
+	}
+	
 	@PostMapping("/send")
 	public String apply(@ModelAttribute Request request, BindingResult result, @RequestParam("cvFile") MultipartFile multipart,
 							RedirectAttributes attribute, Authentication authentication) {
