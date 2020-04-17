@@ -9,5 +9,6 @@ public interface RequestService {
 
 	Page<Request> pageRequests(Pageable pageable);
 	void save(Request request);
+	void deleteById(int id);
 	
 }

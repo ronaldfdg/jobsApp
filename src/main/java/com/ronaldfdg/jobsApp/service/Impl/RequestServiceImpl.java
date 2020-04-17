@@ -25,6 +25,11 @@ public class RequestServiceImpl implements RequestService {
 		repositoryRequest.save(request);
 	}
 
+	@Override
+	public void deleteById(int id) {
+		repositoryRequest.deleteById(id);
+	}
+
 	
 	
 }

@@ -29,31 +29,38 @@
         <div class="card">
           <h4 class="card-header"><strong>Listado de Solicitudes de Empleo</strong></h4>              
           <div class="card-body">
-            <table class="table table-hover">
-              <thead class="thead-light">
-                <tr>
-                  <!-- <th scope="col">Categoría</th>  -->
-                  <th scope="col">Vacante</th>
-                  <th scope="col">Nombre Candidato</th>
-                  <th scope="col">Recibida</th>
-                  <th scope="col">Operaciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr th:each="request : ${requests.content}">
-                  <!-- <td>[[${request.vacant.category.name}]]</td>  -->
-                  <td>[[${request.vacant.name}]]</td>
-                  <td>[[${request.user.name}]]</td>
-                  <td th:text="${#dates.format(request.requestDate, 'dd-MM-yyyy')}"></td>
-                  <td>
-                    <!-- <a href="#" class="btn btn-success btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>  -->
-                    <a href="#" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
-                    <!-- <a href="#" class="btn btn-success btn-sm" role="button" title="Enviar correo electrónico al usuario."><i class="fas fa-envelope" aria-hidden="true"></i></a>  -->
-                    <a th:href="@{/curriculumns/{cv} ( cv = ${request.file} )}" target="_blank" class="btn btn-success btn-sm" role="button" title="Descargar Curriculm Vitae."><i class="fas fa-download" aria-hidden="true"></i></a>
-                  </td>
-                </tr>      
-              </tbody>
-            </table>
+          	<hr>
+        	<div th:if="${messageSuccess != null}" class="alert alert-success" role="alert">
+        		<strong>[[${messageSuccess}]]</strong>
+        	</div>
+          	<hr>
+          	<div class="table-responsive">
+	            <table class="table table-hover">
+	              <thead class="thead-light">
+	                <tr>
+	                  <!-- <th scope="col">Categoría</th>  -->
+	                  <th scope="col">Vacante</th>
+	                  <th scope="col">Nombre Candidato</th>
+	                  <th scope="col">Recibida</th>
+	                  <th scope="col">Operaciones</th>
+	                </tr>
+	              </thead>
+	              <tbody>
+	                <tr th:each="request : ${requests.content}">
+	                  <!-- <td>[[${request.vacant.category.name}]]</td>  -->
+	                  <td>[[${request.vacant.name}]]</td>
+	                  <td>[[${request.user.name}]]</td>
+	                  <td th:text="${#dates.format(request.requestDate, 'dd-MM-yyyy')}"></td>
+	                  <td>
+	                    <!-- <a href="#" class="btn btn-success btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>  -->
+	                    <a th:href="@{/requests/delete/{id} (id=${request.id}) }" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
+	                    <!-- <a href="#" class="btn btn-success btn-sm" role="button" title="Enviar correo electrónico al usuario."><i class="fas fa-envelope" aria-hidden="true"></i></a>  -->
+	                    <a th:href="@{/curriculumns/{cv} ( cv = ${request.file} )}" target="_blank" class="btn btn-success btn-sm" role="button" title="Descargar Curriculm Vitae."><i class="fas fa-download" aria-hidden="true"></i></a>
+	                  </td>
+	                </tr>      
+	              </tbody>
+	            </table>
+            </div>
             <nav aria-label="Page navigation">
             	<ul class="pagination">
             		<li th:if="${requests.number > 0}" class="page-item">
