@@ -11,8 +11,12 @@ public class WebConfig implements WebMvcConfigurer {
 	@Value("${jobsApp.route.images}")
 	private String routeImages;
 	
+	@Value("${jobsApp.route.cvs}")
+	private String routeCvs;
+	
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/logos/**").addResourceLocations("file:"+routeImages);
+		registry.addResourceHandler("/logos/**").addResourceLocations("file:" + routeImages);
+		registry.addResourceHandler("/curriculumns/**").addResourceLocations("file:" + routeCvs);
 	}
 	
 }
