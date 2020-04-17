@@ -21,7 +21,7 @@ public class Request {
 	private int id;
 	
 	@Column(name = "fecha", nullable = false)
-	private Date requestDate;
+	private Date requestDate = new Date();
 	
 	@Column(name = "archivo", nullable = false)
 	private String file;

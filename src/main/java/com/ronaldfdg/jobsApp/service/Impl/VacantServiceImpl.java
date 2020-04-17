@@ -25,6 +25,11 @@ public class VacantServiceImpl implements VacantService {
 	}
 	
 	@Override
+	public List<Vacant> findAllApprovedAndSalient() {
+		return repositoryVacant.findAllApprovedAndSalient();
+	}
+	
+	@Override
 	public Vacant findById(int id) {
 		
 		Optional<Vacant> optional = repositoryVacant.findById(id);

@@ -10,6 +10,7 @@ import com.ronaldfdg.jobsApp.model.Vacant;
 public interface VacantService {
 
 	List<Vacant> findAll();
+	List<Vacant> findAllApprovedAndSalient();
 	Page<Vacant> vacantsPage(Pageable pageable);
 	Vacant findById(int id);
 	boolean existsById(int id);
