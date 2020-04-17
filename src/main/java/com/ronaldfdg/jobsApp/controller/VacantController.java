@@ -55,6 +55,12 @@ public class VacantController {
 		return "vacants/formVacant";
 	}
 	
+	@GetMapping("/view/{id}")
+	public String showDetails(@PathVariable("id") int id, Model model) {
+		model.addAttribute("vacant", serviceVacant.findById(id));
+		return "vacants/detail";
+	}
+	
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable("id") int id, Model model) {
 		model.addAttribute("vacant", serviceVacant.findById(id));
